@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2023_04_18_045103) do
     t.string "phone_number", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "status", default: false, null: false
+    t.boolean "status", default: true, null: false
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2023_04_18_045103) do
     t.string "name", null: false
     t.text "description", null: false
     t.integer "price", null: false
-    t.boolean "sale_status", default: false, null: false
+    t.boolean "sale_status", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
