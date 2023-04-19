@@ -1,6 +1,6 @@
 <div class="container">
   <h1>商品新規登録</h1>
-  <%= form_with model: @menus do |f| %>
+  <%= form_with model: [:admin, @item], url: admin_items_path do |f| %>
     <p>画像画像
       <%= f.file_field :image, accept: "image/*" %>
     </p>
@@ -11,13 +11,13 @@
       <%= f.text_area :description %>
     </p>
     <p>ジャンル
-
+      <%= f.collection_select :genre_id, Genre.all, :id, :name, prompt: 'ジャンルを選択してください' %>
     </p>
     <p>税抜価格
-      <%= f.text_field :price %>
+      <%= f.text_field :price %>円
     </p>
     <p>販売ステータス
-
+      <%= f.select :sales_status, [['販売中', true], ['販売停止中', false]], prompt: 'ステータスを選択してください' %>
     </p>
     <%= f.submit '新規登録',class: 'btn btn-success' %>
   <% end %>
