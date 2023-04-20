@@ -1,0 +1,6 @@
+<h1>ここは管理者用オーダー詳細ページです</h1>
+<%= form_with model: @order, url: admin_order_path, method: :patch, local: true do |f| %>
+ <%= f.select :order_status, Order.order_statuses.keys, class: "order_status" %>
+ <%= f.submit "更新" , class: "btn btn-outline-success" %>
+<% end %>
+

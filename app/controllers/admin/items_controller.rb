@@ -32,4 +32,5 @@ class Admin::ItemsController < ApplicationController
     params.require(:menu).permit( :menu_image, :name, :description, :genre_id, :price, :sale_status)
   end
 
+
 end
