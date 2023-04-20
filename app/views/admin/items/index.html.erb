@@ -12,14 +12,14 @@
       </tr>
     </thead>
     <tbody>
-      <% @items.each do |menu| %>
+      <% @menus.each do |menu| %>
       <tr>
         <td><%= menu.id %></td>
         <td>
-          <%= link_to menu.name, admin_item_path(menu.id), class: 'text-secondary'%>
+          <u><%= link_to menu.name, admin_item_path(menu.id), class: 'text-body underline'%></u>
         </td>
         <td><%= menu.price %></td>
-        <td></td>
+        <td><%= menu.genre.name %></td>
         <td>
           <% if menu.sale_status == true %>
             <%= content_tag :span, '販売中', class: 'text-success' %>

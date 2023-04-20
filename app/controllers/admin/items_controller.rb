@@ -1,26 +1,31 @@
 class Admin::ItemsController < ApplicationController
 
   def index
-    @items = Menu.all
+    @menus = Menu.all
   end
 
   def new
-    @item = Menu.new
+    @menu = Menu.new
   end
 
   def create
-    @item = Menu.new(menu_params)
-    @item.save
+    @menu = Menu.new(menu_params)
+    @menu.save
     redirect_to admin_items_path
   end
 
   def show
+    @menu = Menu.find(params[:id])
   end
 
   def edit
+    @menu = Menu.find(params[:id])
   end
 
   def update
+    menu = Menu.find(params[:id])
+    menu.update(menu_params)
+    redirect_to admin_item_path(menu.id)
   end
 
   def destroy
