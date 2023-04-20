@@ -1,6 +1,7 @@
 class Admin::ItemsController < ApplicationController
 
   def index
+    @items = Menu.all
   end
 
   def new
@@ -28,7 +29,7 @@ class Admin::ItemsController < ApplicationController
   private
 
   def menu_params
-    params.require(:menu).permit( :image, :name, :description, :genre_id, :price, :sale_status)
+    params.require(:menu).permit( :menu_image, :name, :description, :genre_id, :price, :sale_status)
   end
 
 end
