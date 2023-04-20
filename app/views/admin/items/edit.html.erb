@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>商品編集</h1>
+  <h4>商品編集</h4>
   <%= form_with model: [:admin, @menu], url: admin_item_path(@menu.id) do |f| %>
     <p>画像画像
       <%= f.file_field :menu_image, accept: "image/*" %>

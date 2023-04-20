@@ -4,4 +4,7 @@ class Public::ItemsController < ApplicationController
     @menus = Menu.all
   end
 
+  def show
+    @menu = Menu.find(params[:id])
+  end
 end
