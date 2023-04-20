@@ -1,0 +1,39 @@
+<h2>会員情報編集</h2>
+
+<%= form_with model: @customer, url: customers_path(@customer), method: :patch do |f| %>
+
+<div class="form-group">
+  <lavel for="inputName">氏名</lavel>
+  <%= f.text_field :last_name, autofocus: true, id:"inputName" %>
+  <%= f.text_field :first_name, autofocus: true, id:"inputName" %>
+</div>
+
+<div class="form-group">
+  <lavel for="inputKanaName">フリガナ</lavel>
+  <%= f.text_field :last_name_kana, autofocus: true, id:"inputKanaName" %>
+  <%= f.text_field :first_name_kana, autofocus: true, id:"inputKanaName" %>
+</div>
+
+<div class="form-group">
+  <lavel for="inputPostalCode">郵便番号</lavel>
+  <%= f.text_field :postal_code, autofocus: true, id:"inputPostalCode" %>
+</div>
+
+<div class="form-group">
+  <lavel for="inputAddress">住所</lavel>
+  <%= f.text_field :address, autofocus: true, id:"inputAddress" %>
+</div>
+
+<div class="form-group">
+  <lavel for="inputPhoneNumber">電話番号</lavel>
+  <%= f.text_field :phone_number, autofocus: true, id:"inputPhoneNumber" %>
+</div>
+
+<div class="form-group">
+  <lavel for="inputEmail">メールアドレス</lavel>
+  <%= f.text_field :email, autofocus: true, id:"inputEmail" %>
+</div>
+
+<% end %>
+
+<%= link_to "編集内容を保存", customers_path %> <%= link_to "退会する", unsubscribe_customers_path %>
