@@ -16,9 +16,9 @@
       <tr>
         <td><%= menu.id %></td>
         <td>
-          <u><%= link_to menu.name, admin_item_path(menu.id), class: 'text-body underline'%></u>
+          <u><%= link_to menu.name, admin_item_path(menu.id), class: 'text-body underline' %></u>
         </td>
-        <td><%= menu.price %></td>
+        <td>¥<%= number_with_delimiter(menu.price, delimiter: ',') %></td>
         <td><%= menu.genre.name %></td>
         <td>
           <% if menu.sale_status == true %>

@@ -28,9 +28,6 @@ class Admin::ItemsController < ApplicationController
     redirect_to admin_item_path(menu.id)
   end
 
-  def destroy
-  end
-
   private
 
   def menu_params
