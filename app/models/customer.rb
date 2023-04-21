@@ -8,7 +8,4 @@ class Customer < ApplicationRecord
   has_many :deliveries, dependent: :destroy
   has_many :orders, dependent: :destroy
 
-  def active_for_authentication?
-   super && (status == false)
-  end
 end

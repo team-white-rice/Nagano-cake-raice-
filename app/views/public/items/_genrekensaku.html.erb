@@ -1,0 +1,8 @@
+<div class="card">
+  <h7 class="card-title card-header text-center bg-dark text-white">ジャンル検索</h7>
+  <div class="card-body">
+    <% @genres.each do |genre| %>
+      <%= link_to genre.name, items_path(genre_id: genre.id), class: 'd-block text-body mb-2' %>
+    <% end %>
+  </div>
+</div>
