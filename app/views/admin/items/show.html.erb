@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>商品詳細</h1>
+  <h4>商品詳細</h4>
   <div class="row">
     <div class="col-4">
       <%= image_tag @menu.menu_image, size: "300x300" %>
@@ -8,7 +8,7 @@
       <p>商品名  <%= @menu.name %></p>
       <p>商品説明  <%= @menu.description %></p>
       <p>ジャンル  <%= @menu.genre.name %></p>
-      <p>税込価格（税抜価格）  <%= (@menu.price*1.1).round %>  (<%= @menu.price %>)円</p>
+      <p>税込価格（税抜価格）  <%= number_with_delimiter((@menu.price * 1.1).round, delimiter: ',') %>  (<%= number_with_delimiter(@menu.price, delimiter: ',') %>)円</p>
       <p>
         販売ステータス
         <% if @menu.sale_status == true %>
