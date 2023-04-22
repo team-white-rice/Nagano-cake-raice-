@@ -25,7 +25,7 @@ Rails.application.routes.draw do
       get 'complete', on: :collection
     end
 
-    resources :deliveries, except: [:show, :new]
+    resources :deliveries, only: [:index, :new ,:edit, :create ,:update, :destroy]
 
   end
 
