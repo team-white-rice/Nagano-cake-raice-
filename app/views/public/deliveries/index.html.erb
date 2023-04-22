@@ -19,7 +19,7 @@
   <p><%= delivery.post_address %></p>
   <p><%= delivery.address %></p>
   <p><%= delivery.name %></p>
-  <%= link_to '編集する', edit_delivery_path(delivery.id) %>
-  <%= link_to '削除する', delivery_path(delivery.id), method: :delete %>
+  <%= link_to '編集する', edit_delivery_path(delivery) %>
+  <%= button_to '削除する', delivery_path(delivery.id), :method=> :delete %>
 </div>
 <% end %>
