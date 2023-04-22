@@ -1,25 +1,8 @@
-<div class="genres">
-
-  <h2 class="title">ジャンル検索</h2>
-
-  <ul class="genres lists">
-
-    <li>
-      <%= link_to 'ケーキ',            class: 'nav-link text-secondary' %>
-    </li>
-
-    <li>
-      <%= link_to '焼き菓子',            class: 'nav-link text-secondary' %>
-    </li>
-
-    <li>
-      <%= link_to 'プリン',            class: 'nav-link text-secondary' %>
-    </li>
-
-    <li>
-      <%= link_to 'キャンディ',            class: 'nav-link text-secondary' %>
-    </li>
-
-  </ul>
-
+<div class="card">
+  <h7 class="card-title card-header text-center bg-dark text-white">ジャンル検索</h7>
+  <div class="card-body">
+    <% @genres.each do |genre| %>
+      <%= link_to genre.name, items_path(genre_id: genre.id), class: 'd-block text-body mb-2' %>
+    <% end %>
+  </div>
 </div>

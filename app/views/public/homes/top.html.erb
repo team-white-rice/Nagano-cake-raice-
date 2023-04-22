@@ -1,29 +1,11 @@
-<div class="side bar">
-    <%= render 'genres' %>
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <%= render 'genres' %>
+    </div>
+    <div class="col-10">
+      <%= image_tag('top.png', size: "700x500") %>
+    </div>
   </div>
-
-  <div class="top main">
-
-    <div class="about imag">
-      <%= image_tag('top.png') %>
-    </div>
-
-    <p class="top introduction">
-      ようこそ、ながのCAKEへ！</br>
-      このサイトは、ケーキ販売のECサイトになります。</br>
-      会員でない方も商品の閲覧はできますが、</br>
-      購入には会員登録が必要になります。
-    </p>
-
-    <div class="new item">
-      <h2 class="new item title">新着商品</h2>
-
-
-
-    </div>
-
-    <div class="menus_path_link">
-      <%= link_to "すべての商品を見る", items_path %>
-    </div>
-
-  </div>
+</div>
+<%= link_to "すべての商品を見る", items_path %>
