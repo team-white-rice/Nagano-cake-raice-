@@ -8,6 +8,7 @@ class Customer < ApplicationRecord
   has_many :deliveries, dependent: :destroy
   has_many :orders, dependent: :destroy
 
+
   # validates :last_name, length: { minimum: 2 }
   # validates :first_name, length: { minimum: 2 }
   # validates :last_name_kana, length: { minimum: 2 }
