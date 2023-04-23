@@ -1,12 +1,11 @@
 class Public::ItemsController < ApplicationController
 
   def index
-    @menus = Menu.all
     @genres = Genre.all
     if params[:genre_id]
-      @menus = Menu.where(genre_id: params[:genre_id])
+      @menus = Menu.where(genre_id: params[:genre_id]).page(params[:page]).per(8)
     else
-      @menus = Menu.all
+      @menus = Menu.page(params[:page]).per(8)
     end
   end
 
