@@ -1,35 +1,33 @@
 <div class="container">
-  <h4><span class="bg-light px-3 py-1"><%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細</span></h4>
-  <div class="row justify-content-start">
-    <div class="col-2">
-      <p>会員ID</p>
-      <p>氏名</p>
-      <p>フリガナ</p>
-      <p>郵便番号</p>
-      <p>住所</p>
-      <p>電話番号</p>
-      <p>メールアドレス</p>
-      <p>会員ステータス</p>
-    </div>
-    <div class="col-5">
-      <p><%= @customer.id %></p>
-      <p><%= @customer.last_name %> <%= @customer.first_name %></p>
-      <p><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></p>
-      <p><%= @customer.postal_code %></p>
-      <p><%= @customer.address %></p>
-      <p><%= @customer.phone_number %></p>
-      <p><%= @customer.email %></p>
-      <p>
-        <% if @customer.status == true %>
-        <%= content_tag :span, '有効', class: 'text-success' %>
-        <% else %>
-        <%= '退会' %>
-        <% end %>
-      </p>
-      <p class="d-inline-block">
-        <%= link_to "編集する", edit_admin_customer_path, class: 'btn btn-success mr-5' %>
-        <%= link_to "注文履歴一覧を見る", orders_path, class: 'btn btn-primary' %>
-      </p>
-    </div>
-  </div>
+  <h4><span class="bg-light px-3 py-1">会員一覧</span></h4>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">会員ID</th>
+        <th scope="col">氏名</th>
+        <th scope="col">メールアドレス</th>
+        <th scope="col">ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @customers.each do |customer| %>
+      <tr>
+        <td><%= customer.id %></td>
+        <td>
+          <%= link_to admin_customer_path(customer.id) do %>
+          <u class="text-body"><%=  customer.last_name %><%=  customer.first_name %></u>
+          <% end %>
+        </td>
+        <td><%= customer.email %></td>
+        <td>
+          <% if customer.status == true %>
+            <%= content_tag :span, '有効', class: 'text-success' %>
+          <% else %>
+            <%= '退会' %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
