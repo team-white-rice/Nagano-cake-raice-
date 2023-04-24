@@ -13,7 +13,7 @@
   <% @total_quantity += order_detail.quantity %>
  <% end %>
  <%= @total_quantity %>
- <td><%= order.order_status %></td>
+ <td><%= Order.statuses_i18n[:wait_payment] %></td>
 <% end %>
 <table>
  <thead>
@@ -38,11 +38,11 @@
   <td>
    <% @total_quantity = 0 %>
    <% order.order_details.each do |order_detail| %>
-    <% @total_quantity += order_detail.amount %>
+    <% @total_quantity += order_detail.quantity %>
    <% end %>
    <%= @total_quantity %>
   </td>
-  <td><%= order.order_status %></td>
+  <td><%= Order.statuses_i18n[:wait_payment] %></td>
  </tr>
 <% end %>
 </tbody>

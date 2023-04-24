@@ -29,12 +29,7 @@
  </tr>
  <tr>
   <td>
-   <% if @order.発送準備中? || @order.発送済み?  %>
-    <%= f.select :order_status, Order.order_statuses.keys, class: "order_status" %>
-   <% else %>
-    <%= f.select :order_status,Order.order_statuses.keys, {disabled: ["発送準備中","発送済み"]} %>
-   <% end %>
-   <%= f.submit "更新" , class: "btn btn-outline-success" %>
+   <!--ここに注文ステータスの記述-->
   </td>
  </tr>
 </table>
@@ -52,7 +47,7 @@
  <tbody>
   <% @order.order_details.each do |order_detail| %>
    <tr>
-    <td><%= order_detail.item.name %></td>
+    <td><%= order_detail.menu.name %></td>
     <td><%= order_detail.item_price %></td>
     <td>
      <%= order_detail.quantity %>
@@ -73,7 +68,7 @@
  <tr>
   <th>商品合計</th>
   <td>
-   <% @total_price = item_price(@order.total_price) %>
+   <% @total_price = total_price(@order.total_price) %>
    <%= @total_price %>円
   </td>
  </tr>
