@@ -1,6 +1,13 @@
 <div class="container">
-  <h4>商品一覧</h4>
-  <%= link_to "新しい商品を追加する", new_admin_item_path, class: 'btn btn-success' %>
+  <div class="row mb-3">
+    <h4 class="col-10"><span class="bg-light px-3 pb-1">商品一覧</span></h4>
+    <div class="col-2 d-flex justify-content-end">
+      <%= link_to new_admin_item_path do %>
+        <i class="fas fa-plus-circle fa-lg" style="color: #05ca02;"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
   <table class="table">
     <thead class="thead-dark">
       <tr>
@@ -8,6 +15,7 @@
         <th scope="col">商品名</th>
         <th scope="col">税抜価格</th>
         <th scope="col">ジャンル</th>
+        <th scope="col"></th>
         <th scope="col">ステータス</th>
       </tr>
     </thead>
@@ -20,6 +28,7 @@
         </td>
         <td>¥<%= number_with_delimiter(menu.price, delimiter: ',') %></td>
         <td><%= menu.genre.name %></td>
+        <td class="px-5"></td>
         <td>
           <% if menu.sale_status == true %>
             <%= content_tag :span, '販売中', class: 'text-success' %>
@@ -31,4 +40,10 @@
       <% end %>
     </tbody>
   </table>
+  </div>
+  <div class="row">
+    <div class="mx-auto">
+      <%= paginate @menus, theme: 'twitter-bootstrap-4' %>
+    </div>
+  </div>
 </div>

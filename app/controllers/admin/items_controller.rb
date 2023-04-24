@@ -1,7 +1,7 @@
 class Admin::ItemsController < ApplicationController
 
   def index
-    @menus = Menu.all
+    @menus = Menu.page(params[:page]).per(10)
   end
 
   def new
