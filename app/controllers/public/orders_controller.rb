@@ -10,12 +10,12 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
+    @order = current_customer.orders.all
   end
 
 
   def confirm
     @order = Order.new(order_params)
-    #@delivery = Delivery.find(params[:order][:address_id])
     if params[:order][:select_delivery] == "0"
       @order.postcode = current_customer.postal_code
       @order.ship_to_address = current_customer.address
@@ -43,7 +43,7 @@ class Public::OrdersController < ApplicationController
       @order_details = OrderDetail.new
       @order_details.order_id = @order.id
       @order_details.menu_id = cart_item.menu.id
-      @order_details.item_price = cart_item.item_quantity.price_excluding_tax
+      @order_details.item_price = cart_item.menu.price
       @order_details.quantity = cart_item.item_quantity
       @order_details.production_status = 0
       @order_details.save!
@@ -53,9 +53,6 @@ class Public::OrdersController < ApplicationController
     redirect_to complete_orders_path
 
   end
-
-
-
 
   private
 

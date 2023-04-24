@@ -16,19 +16,19 @@
 
       <tr>
         <td>
-          <%= attachment_image_tag(cart_item.item, :image, size: "60x50", format: 'jpeg') %>
-          <%= cart_item.item.name %>
+          <%= image_tag(cart_item.menu.menu_image, size: "60x50", format: 'jpeg') %>
+          <%= cart_item.menu.name %>
         </td>
 
         <td>
-          <%= cart_item.item_price.with_tax_price %>
+          <%= cart_item.menu.price %>
         </td>
 
         <td>
           <%= cart_item.item_quantity %>
         </td>
 
-        <% @sum += cart_item.subtotal %>
+        <% @sum += cart_item.menu.price %>
         <td>
           <%= @sum %>
         </td>

@@ -2,6 +2,7 @@ class Public::CartItemsController < ApplicationController
   before_action :authenticate_customer!
 
   def create
+    puts params.inspect
     @cart_item = current_customer.cart_items.new(cart_item_params)
     if current_customer.cart_items.find_by(menu_id: params[:cart_item][:menu_id]).present?
       cart_item = current_customer.cart_items.find_by(menu_id: params[:cart_item][:menu_id])
