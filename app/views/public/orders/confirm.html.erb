@@ -1,87 +1,88 @@
 <div class="container">
-
-  <h2><strong>注文情報確認</strong></h2>
-
-  <table class="table">
-      <tr>
-        <td>商品名</td>
-        <td>単価</td>
-        <td>数量</td>
-        <td>小計</td>
-      </tr>
-
-      <% @sum = 0 %>
-
-      <% @cart_items.each do |cart_item| %>
-
-      <tr>
-        <td>
-          <%= image_tag(cart_item.menu.menu_image, size: "60x50", format: 'jpeg') %>
-          <%= cart_item.menu.name %>
-        </td>
-
-        <td>
-          <%= cart_item.menu.price %>
-        </td>
-
-        <td>
-          <%= cart_item.item_quantity %>
-        </td>
-
-        <% @sum += cart_item.menu.price %>
-        <td>
-          <%= @sum %>
-        </td>
-      </tr>
-      <% end %>
-  </table>
-
-
-  <table class="table">
-
-    <tr>
-      <td>送料</td>
-      <td>800</td>
-    </tr>
-
-    <tr>
-      <td>商品合計</td>
-      <td><%= @sum %></td>
-    </tr>
-
-    <tr>
-      <td>請求金額</td>
-      <td><%= @sum + 800 %></td>
-    </tr>
-
-  </table>
-
-  <table class="table">
-    <tr>
-      <th>支払方法</th>
-      <td><%= @order.payment_method_i18n %></td>
-    </tr>
-
-    <tr>
-      <th>お届け先</th>
-      <td>
-        <%= @order.ship_to_address %>
+  <div class="row justify-content-between mb-3">
+    <h4 class="col"><span class="bg-light px-3 pb-1">注文情報確認</span></h4>
+  </div>
+    <div class="row">
+      <div class="col-8">
+      <table class="table table-bordered">
+        <thead>
+          <tr class="table-secondary">
+            <th scope="col">商品名</th>
+            <th scope="col">単価（税込）</th>
+            <th scope="col">数量</th>
+            <th scope="col">小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @sum = 0 %>
+          <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td>
+                <%= image_tag(cart_item.menu.menu_image, size: "50x50", format: 'jpeg') %>
+                <%= cart_item.menu.name %>
+              </td>
+              <td>
+                <%= number_with_delimiter((cart_item.menu.price * 1.1).round, delimiter: ',') %>
+              </td>
+              <td>
+                <%= cart_item.item_quantity %>
+              </td>
+              <td>
+                <% subtotal = number_with_delimiter(((cart_item.menu.price * cart_item.item_quantity) * 1.1).round, delimiter: ',') %>
+                <%= subtotal %>
+              </td>
+            </tr>
+            <% end %>
+        </tbody>
+      </table>
+      </div>
+      <div class="col-1"></div>
+      <div class="col-3">
+        <table class="table table-bordered">
+          <tr>
+            <th class="table-secondary">送料</th>
+            <td>800</td>
+          </tr>
+          <tr>
+            <th class="table-secondary">商品合計</th>
+            <td>
+              <% total = 0 %>
+              <% @cart_items.each do |cart_item| %>
+              <% subtotal = ((cart_item.menu.price * cart_item.item_quantity) * 1.1).to_i %>
+              <% total += subtotal %>
+              <% end %>
+              <%= number_with_delimiter(total,delimiter: ',') %>
+            </td>
+          </tr>
+          <tr>
+            <th class="table-secondary">請求金額</th>
+            <td><%= number_with_delimiter(total+800,delimiter: ',') %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <h5><strong class="ml-3">支払方法</strong></h5>
+      <p class="ml-3"><%= @order.payment_method_i18n %></p>
+    </div>
+    <div class="row mt-4">
+      <h5><strong class="ml-3">お届け先</strong></h5>
+      <p class="ml-3">
+        〒<%= @order.postcode %> <%= @order.ship_to_address %><br>
         <%= @order.ship_name %>
-      </td>
-    </tr>
-  </table>
-
-
-<%= form_with model: @order, url: "/orders", local:true  do |f| %>
-  <%= f.hidden_field :customer_id, value: current_customer.id %>
-  <%= f.hidden_field :payment_method, value: @order.payment_method %>
-  <%= f.hidden_field :freight, value: 800 %>
-  <%= f.hidden_field :postcode, value: @order.postcode %>
-  <%= f.hidden_field :total_price, value: @sum + 800 %>
-  <%= f.hidden_field :ship_to_address, value: @order.ship_to_address %>
-  <%= f.hidden_field :ship_name, value:@order.ship_name %>
-  <%= f.hidden_field :status, value: "wait_payment" %>
-  <%= f.submit "注文を確定する" %>
-<% end %>
-
+      </p>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <%= form_with model: @order, url: "/orders", local:true  do |f| %>
+      <%= f.hidden_field :customer_id, value: current_customer.id %>
+      <%= f.hidden_field :payment_method, value: @order.payment_method %>
+      <%= f.hidden_field :freight, value: 800 %>
+      <%= f.hidden_field :postcode, value: @order.postcode %>
+      <%= f.hidden_field :total_price, value: @sum + 800 %>
+      <%= f.hidden_field :ship_to_address, value: @order.ship_to_address %>
+      <%= f.hidden_field :ship_name, value:@order.ship_name %>
+      <%= f.hidden_field :status, value: "wait_payment" %>
+      <%= f.submit "注文を確定する", class: 'btn btn-success btn-lg' %>
+      <% end %>
+    </div>
 </div>
