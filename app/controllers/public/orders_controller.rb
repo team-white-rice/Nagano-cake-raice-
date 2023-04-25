@@ -3,19 +3,19 @@ class Public::OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @delivery = Delivery.all
+    @delivery = current_customer.deliveries.all
   end
 
   def show
   end
 
   def index
+    @order = current_customer.orders.all
   end
 
 
   def confirm
     @order = Order.new(order_params)
-    #@delivery = Delivery.find(params[:order][:address_id])
     if params[:order][:select_delivery] == "0"
       @order.postcode = current_customer.postal_code
       @order.ship_to_address = current_customer.address
@@ -33,29 +33,22 @@ class Public::OrdersController < ApplicationController
       render :confirm
   end
 
-
   def create
     @order = Order.new(order_params)
     @order.save!
     @cart_items = current_customer.cart_items.all
-
     @cart_items.each do |cart_item|
       @order_details = OrderDetail.new
       @order_details.order_id = @order.id
       @order_details.menu_id = cart_item.menu.id
-      @order_details.item_price = cart_item.item_quantity.price_excluding_tax
+      @order_details.item_price = cart_item.menu.price
       @order_details.quantity = cart_item.item_quantity
       @order_details.production_status = 0
       @order_details.save!
     end
-
     CartItem.destroy_all
     redirect_to complete_orders_path
-
   end
-
-
-
 
   private
 
