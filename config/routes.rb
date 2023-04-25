@@ -5,16 +5,18 @@ Rails.application.routes.draw do
 
     resources :items, only: [:index, :show]
 
-    devise_for :customers, controllers: {
-      registrations: 'public/registrations',
-      sessions: 'public/sessions'
-    }
-
     resource :customers, only: [:show, :update] do
       get 'information/edit', to: 'customers#edit', as: 'edit_information'
       get 'unsubscribe'
       patch 'withdrawal'
     end
+
+    devise_for :customers, controllers: {
+      registrations: 'public/registrations',
+      sessions: 'public/sessions'
+    }
+
+
 
     resources :cart_items, only: [:index, :create, :update, :destroy] do
       delete 'destroy_all', on: :collection
@@ -30,7 +32,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    devise_for :admins, controllers: { sessions: 'admin/sessions' }, path: '', path_names: { sign_in: 'sign_in', sign_out: 'sign_out'}
+    devise_for :admins, skip: [:registrations, :passwords] , controllers: { sessions: 'admin/sessions' }, path: '', path_names: { sign_in: 'sign_in', sign_out: 'sign_out'}
 
     get '', to: 'homes#top'
 

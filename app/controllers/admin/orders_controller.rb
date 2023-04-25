@@ -1,4 +1,5 @@
 class Admin::OrdersController < ApplicationController
+  before_action :authenticate_admin_admin!
 
   def show
     @order = Order.find(params[:id])
@@ -6,7 +7,7 @@ class Admin::OrdersController < ApplicationController
     @order_details = OrderDetail.where(order_id: @order)
     @production_status = @order.order_details.pluck(:production_status)
   end
-  
+
   def update
     @order = Order.find(params[:id])
     @order_details = OrderDetail.where(order_id: @order)
@@ -26,5 +27,5 @@ class Admin::OrdersController < ApplicationController
   def order_status_params
     params.require(:order).permit(:order_status)
   end
-  
+
 end
