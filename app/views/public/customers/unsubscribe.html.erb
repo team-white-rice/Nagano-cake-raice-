@@ -7,15 +7,6 @@
     退会する場合は、「退会する」ボタンをクリックしてください。
   </p>
 
-  <div class="d-flex justify-content-center">
-    <div class="row my-3">
-      <div class="col gx-4">
-        <%= link_to "退会しない", customers_path, class: 'btn btn-primary', style: 'width: auto' %>
-      </div>
-      <div class="col gx-4">
-        <%= link_to "退会する", root_path, method: :patch, class: 'btn btn-danger', style: 'width: auto' %>
-      </div>
-    </div>
-  </div>
-
+<%= link_to "退会しない", customers_path %>
+<%= link_to "退会する", withdrawal_customers_path(@customer.id), method: :patch, data: { confilm: "本当に退会しますか？" } %>
 </div>
