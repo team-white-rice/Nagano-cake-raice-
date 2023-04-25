@@ -12,7 +12,7 @@ ja:
         already_shipped: "発送済"
     order_detail:
       production_status:
-        cant_star: "着手不可"
+        cant_start: "着手不可"
         awaiting_manufacture: "製作待ち"
         manufacturing: "製作中"
         finish: "製作完了"
