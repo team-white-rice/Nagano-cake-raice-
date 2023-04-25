@@ -12,7 +12,7 @@ class Admin::ItemsController < ApplicationController
   def create
     @menu = Menu.new(menu_params)
     @menu.save
-    redirect_to admin_items_path
+    redirect_to admin_item_path(@menu.id)
   end
 
   def show

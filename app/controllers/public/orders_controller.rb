@@ -7,10 +7,11 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
+    @order = Order.find(params[:id])
   end
 
   def index
-    @order = current_customer.orders.all
+    @order = current_customer.orders.all.page(params[:page]).per(10)
   end
 
 
@@ -19,7 +20,7 @@ class Public::OrdersController < ApplicationController
     if params[:order][:select_delivery] == "0"
       @order.postcode = current_customer.postal_code
       @order.ship_to_address = current_customer.address
-      @order.ship_name = current_customer.first_name + current_customer.last_name
+      @order.ship_name = current_customer.last_name + current_customer.first_name
     elsif params[:order][:select_delivery] == "1"
       @delivery = Delivery.find(params[:order][:address_id])
       @order.postcode =  @delivery.post_address
