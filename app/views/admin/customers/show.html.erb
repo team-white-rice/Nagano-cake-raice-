@@ -1,32 +1,40 @@
 <div class="container">
-  <h4><span class="bg-light px-3 py-1">会員一覧</span></h4>
-  <table class="table">
-    <thead class="thead-dark">
+  <div class="row">
+    <h4><span class="bg-light px-3 pb-1"><%=  @customer.last_name %><%=  @customer.first_name %>さんの会員詳細</span></h4>
+  </div>
+  <div class="row mt-3">
+    <table>
       <tr>
-        <th scope="col">会員ID</th>
-        <th scope="col">氏名</th>
-        <th scope="col">フリガナ</th>
-        <th scope="col">郵便番号</th>
-        <th scope="col">住所</th>
-        <th scope="col">電話番号</th>
-        <th scope="col">メールアドレス</th>
-        <th scope="col">会員ステータス</th>
+        <td>会員ID</td>
+        <td style="padding-bottom: 10px;"><%= @customer.id %></td>
       </tr>
-    </thead>
-
       <tr>
-        <td><%= @customer.id %></td>
-        <td>
-          <u class="text-body"><%=  @customer.last_name %><%=  @customer.first_name %></u>
-        </td>
-        <td>
-          <u class="text-body"><%=  @customer.last_name_kana %><%=  @customer.first_name_kana %></u>
-        </td>
-        <td><%= @customer.postal_code %></td>
-        <td><%= @customer.address %></td>
-        <td><%= @customer.phone_number %></td>
-        <td><%= @customer.email %></td>
-        <td>
+        <td>氏名</td>
+        <td style="padding-bottom: 10px;"><%=  @customer.last_name %><%=  @customer.first_name %></td>
+      </tr>
+      <tr>
+        <td>フリガナ</td>
+        <td style="padding-bottom: 10px;"><%=  @customer.last_name_kana %><%=  @customer.first_name_kana %></td>
+      </tr>
+      <tr>
+        <td>郵便番号</td>
+        <td style="padding-bottom: 10px;"><%= @customer.postal_code %></td>
+      </tr>
+      <tr>
+        <td>住所</td>
+        <td style="padding-bottom: 10px;"><%= @customer.address %></td>
+      </tr>
+      <tr>
+        <td>電話番号</td>
+        <td style="padding-bottom: 10px;"><%= @customer.phone_number %></td>
+      </tr>
+      <tr>
+        <td>メールアドレス</td>
+        <td style="padding-bottom: 10px;"><%= @customer.email %></td>
+      </tr>
+      <tr>
+        <td style="padding-bottom: 15px; padding-right: 40px;">会員ステータス</td>
+        <td style="padding-bottom: 20px;">
           <% if @customer.status == true %>
             <%= content_tag :span, '有効', class: 'text-success' %>
           <% else %>
@@ -35,13 +43,10 @@
         </td>
       </tr>
       <tr>
-        <td>
-          <%= link_to '編集する', edit_admin_customer_path(@customer), class: 'btn btn-success' %>
-        </td>
-        <td>
-          <%= link_to '注文履歴一覧を見る', admin_path, class: 'btn btn-primary' %>
-        </td>
+        <td></td>
+        <td style="padding-right: 40px;"><%= link_to '編集する', edit_admin_customer_path(@customer), class: 'btn btn-success' %></td>
+        <td><%= link_to '注文履歴一覧を見る', admin_path, class: 'btn btn-primary' %></td>
       </tr>
-    </tbody>
-  </table>
+    </table>
+  </div>
 </div>
