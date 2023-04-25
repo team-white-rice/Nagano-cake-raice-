@@ -3,7 +3,7 @@ class Public::OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @delivery = Delivery.all
+    @delivery = current_customer.deliveries.all
   end
 
   def show
@@ -33,12 +33,10 @@ class Public::OrdersController < ApplicationController
       render :confirm
   end
 
-
   def create
     @order = Order.new(order_params)
     @order.save!
     @cart_items = current_customer.cart_items.all
-
     @cart_items.each do |cart_item|
       @order_details = OrderDetail.new
       @order_details.order_id = @order.id
@@ -48,10 +46,8 @@ class Public::OrdersController < ApplicationController
       @order_details.production_status = 0
       @order_details.save!
     end
-
     CartItem.destroy_all
     redirect_to complete_orders_path
-
   end
 
   private
