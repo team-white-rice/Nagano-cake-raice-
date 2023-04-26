@@ -1,16 +1,79 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>NaganoCake</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-    <%= yield %>
-  </body>
+<head>
+  <title>NaganoCake</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <div class="d-flex flex-column min-vh-100">
+    <header class="mb-5">
+      <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/"><%= image_tag('logo.png', size: "150x75") %></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+              <% if customer_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to 'マイページ', customers_path, class: 'btn btn-outline-secondary mr-3' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to '商品一覧', items_path, class: 'btn btn-outline-secondary mr-3' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to 'カート', cart_items_path, class: 'btn btn-outline-secondary mr-3' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'btn btn-outline-secondary' %>
+                </li>
+              <% elsif admin_admin_signed_in? %>
+                 <li class="nav-item">
+                  <%= link_to "商品一覧", admin_items_path, class: 'btn btn-outline-secondary mr-3' %>
+                 </li>
+                 <li class="nav-item">
+                  <%= link_to "会員一覧", admin_customers_path, class: 'btn btn-outline-secondary mr-3' %>
+                 </li>
+                 <li class="nav-item">
+                  <%= link_to "注文履歴一覧", admin_path, class: 'btn btn-outline-secondary mr-3' %>
+                 </li>
+                 <li class="nav-item">
+                  <%= link_to "ジャンル一覧", admin_genres_path, class: 'btn btn-outline-secondary mr-3' %>
+                 </li>
+                 <li class="nav-item">
+                  <%= link_to "ログアウト", destroy_admin_admin_session_path, method: :delete, class: 'btn btn-outline-secondary' %>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to 'about', about_path, class: 'btn btn-outline-secondary mr-3' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to '商品一覧', items_path, class: 'btn btn-outline-secondary mr-3' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "新規登録", new_customer_registration_path, class: 'btn btn-outline-secondary mr-3' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ログイン", new_customer_session_path, class: 'btn btn-outline-secondary' %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="flex-grow-1">
+      <%= yield %>
+    </main>
+  </div>
+</body>
+<div class="bg-warning w-100 mt-5" style="height: 80px;">
+  <div class="container d-flex align-items-center justify-content-center h-100">
+  </div>
+</div>
 </html>

@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <h4 class="bg-light px-3 pb-1"><strong>配送先編集</strong></h4>
+  </div>
+  <div class="row">
+    <%= form_with model: @delivery, method: :patch  do |f| %>
+    <table>
+      <tr>
+        <td>郵便番号（ハイフンなし）</td>
+        <td style="padding-bottom: 10px;"><%= f.text_field :post_address, autofocus: true, id:"input_post_address", placeholder:"郵便番号を入力してください"%></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>住所</td>
+        <td style="padding-bottom: 10px;"><%= f.text_field :address, placeholder:"住所を入力してください",size: "50" %></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>宛名</td>
+        <td style="padding-bottom: 10px;"><%= f.text_field :name, placeholder:"名前を入力してください" %></td>
+        <td><%= f.submit "変更を保存", class: 'btn btn-success' %></td>
+      </tr>
+    </table>
+    <% end %>
+  </div>
+</div>

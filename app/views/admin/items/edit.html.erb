@@ -1,0 +1,44 @@
+<div class="container">
+  <h4 class="mb-5"><span class="bg-light px-3 pb-1">商品編集</span></h4>
+  <div class="row">
+    <div class="mx-auto">
+      <%= form_with model: [:admin, @menu], url: admin_item_path(@menu.id) do |f| %>
+        <table>
+          <tr>
+            <td width="140" style="padding-bottom: 10px;">画像画像</td>
+            <td style="padding-bottom: 10px;"><%= f.file_field :menu_image, accept: "image/*"%></td>
+          </tr>
+          <tr>
+            <td style="padding-bottom: 10px;">商品名</td>
+            <td style="padding-bottom: 10px;"><%= f.text_field :name, :size=>"30" %></td>
+          </tr>
+          <tr>
+            <td style="padding-bottom: 10px;">商品説明</td>
+            <td style="padding-bottom: 10px;"><%= f.text_area :description, :size=>"29" %></td>
+          </tr>
+          <tr>
+            <td style="padding-bottom: 10px;">ジャンル</td>
+            <td style="padding-bottom: 10px;"><%= f.collection_select :genre_id, Genre.all, :id, :name, prompt: 'ジャンルを選択してください' %></td>
+          </tr>
+          <tr>
+            <td style="padding-bottom: 10px;">税抜価格</td>
+            <td style="padding-bottom: 10px;"><%= f.text_field :price , :size=>"30"%>円</td>
+          </tr>
+          <tr>
+            <td style="padding-bottom: 10px;">販売ステータス</td>
+            <td style="padding-bottom: 10px;">
+              販売中
+              <%= f.radio_button :sale_status, true, checked: true %>
+              販売停止中
+              <%= f.radio_button :sale_status, false %>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%= f.submit '変更を保存', class: 'btn btn-success' %></td>
+          </tr>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>
