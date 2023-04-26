@@ -3,7 +3,6 @@ class Public::OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @delivery = current_customer.deliveries.all
   end
 
   def show

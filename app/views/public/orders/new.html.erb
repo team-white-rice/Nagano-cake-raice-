@@ -20,7 +20,7 @@
         </p>
         <p class="mt-4"><%= f.radio_button :select_delivery, 1 %>登録済住所から選択</p>
         <div class="ml-5">
-          <%= f.select :address_id, options_from_collection_for_select(Delivery.all, :id, :delivery_display) %>
+          <%= f.select :address_id, options_from_collection_for_select(current_customer.deliveries, :id, :delivery_display) %>
         </div>
         <p class="mt-4"><%= f.radio_button :select_delivery, 2 %>新しいお届け先</p>
         <table class="ml-5">
