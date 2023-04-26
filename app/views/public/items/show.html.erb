@@ -19,6 +19,8 @@
    　    <%= f.hidden_field :menu_id, :value => @menu.id %>
         <%= f.submit "カートに入れる",class: 'btn btn-success' %>
         <% end %>
+      <% else %>
+        <p class="text-danger">売り切れ</p>
       <% end %>
     </div>
   </div>

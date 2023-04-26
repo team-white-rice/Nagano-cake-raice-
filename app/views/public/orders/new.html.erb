@@ -4,14 +4,14 @@
   </div>
   <div class="row">
     <%= form_with model: @order, url: '/orders/confirm', method: :post, local: true do |f| %>
-      <h4><strong>支払方法</strong></h4>
+      <h5><strong>支払方法</strong></h5>
       <div class="ml-5">
         <%= f.radio_button :payment_method, Order.payment_methods.key(0), checked: true %>
         <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %><br>
         <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
         <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer] %>
       </div>
-      <h4 class="mt-5"><strong>お届け先</strong></h4>
+      <h5 class="mt-5"><strong>お届け先</strong></h5>
       <div class="ml-5">
         <p><%= f.radio_button :select_delivery, 0, checked: true %>ご自身の住所</p>
         <p class="ml-5">
@@ -26,15 +26,15 @@
         <table class="ml-5">
           <tr>
             <td style="padding-right: 20px;">郵便番号</td>
-            <td style="padding-bottom: 5px;"><%= f.text_field :postcode %></td>
+            <td style="padding-bottom: 5px;"><%= f.text_field :postcode, :size=>"30"%></td>
           </tr>
           <tr>
             <td>住所</td>
-            <td style="padding-bottom: 5px;"><%= f.text_field :ship_to_address %></td>
+            <td style="padding-bottom: 5px;"><%= f.text_field :ship_to_address, :size=>"30"%></td>
           </tr>
           <tr>
             <td>宛名</td>
-            <td><%= f.text_field :ship_name %></td>
+            <td><%= f.text_field :ship_name, :size=>"30"%></td>
           </tr>
         </table>
         <div class="mt-4">
