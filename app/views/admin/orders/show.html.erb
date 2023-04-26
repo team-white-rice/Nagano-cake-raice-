@@ -70,7 +70,7 @@
       <table>
         <tr>
           <th class="h5"><strong>商品合計</strong></th>
-          <td class="h6"><%= @order.total_price %>円</td>
+          <td class="h6"><%= @order.total_price - @order.freight %>円</td>
         </tr>
         <tr>
           <th class="h5"><strong>送料</strong></th>
@@ -80,8 +80,7 @@
           <th style="padding-right: 15px;" class="h5"><strong>請求金額合計</strong></th>
           <td class="h5">
             <strong>
-              <% @total_payment_add_shipping_fee = @order.total_price + @order.freight %>
-              <%= @total_payment_add_shipping_fee %> 円
+              <%= @order.total_price %> 円
             </strong>
           </td>
         </tr>
