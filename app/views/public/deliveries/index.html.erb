@@ -1,25 +1,59 @@
-<h1>配送先登録/一覧</h1>
-
-<%= form_with model: @delivery_new do |f| %>
-  <h4>郵便番号（ハイフンなし）</h4>
-  <%= f.text_field :post_address %>
-
-  <h4>住所</h4>
-  <%= f.text_area :address, class: 'form-control',size: "20x1" %>
-
-  <h4>名前</h4>
-  <%= f.text_field :name %>
-
-  <%= f.submit '新規登録' %>
-<% end %>
-
-
-<% @deliveries.each do |delivery| %>
-<div>
-  <p><%= delivery.post_address %></p>
-  <p><%= delivery.address %></p>
-  <p><%= delivery.name %></p>
-  <%= link_to '編集する', edit_delivery_path(delivery) %>
-  <%= button_to '削除する', delivery_path(delivery.id), :method=> :delete %>
+<div class="container">
+  <div class="row">
+    <h4 class="bg-light px-3 pb-1"><strong>配送先登録/一覧</strong></h4>
+  </div>
+  <div class="row">
+    <%= form_with model: @delivery_new do |f| %>
+    <table>
+      <tr>
+        <td>郵便番号（ハイフンなし）</td>
+        <td style="padding-bottom: 10px;"><%= f.text_field :post_address %></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>住所</td>
+        <td style="padding-bottom: 10px;"><%= f.text_field :address,size: "50" %></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>宛名</td>
+        <td style="padding-bottom: 10px;"><%= f.text_field :name %></td>
+        <td><%= f.submit '新規登録', class: 'btn btn-success' %></td>
+      </tr>
+    </table>
+    <% end %>
+  </div>
+  <% if @deliveries.present? %>
+  <div class="row mt-5">
+    <div class="col-8">
+    <table class="table table-bordered">
+      <tr class="table-secondary">
+        <td>郵便番号</td>
+        <td>住所</td>
+        <td>宛名</td>
+        <td></td>
+      </tr>
+      <% @deliveries.each do |delivery| %>
+      <tr>
+        <td><%= delivery.post_address %></td>
+        <td><%= delivery.address %></td>
+        <td><%= delivery.name %></td>
+        <td>
+          <div class="d-inline-flex">
+            <%= link_to '編集する', edit_delivery_path(delivery), class: 'btn btn-success btn-sm mr-2' %>
+            <%= button_to '削除する', delivery_path(delivery.id), :method=> :delete, class: 'btn btn-danger btn-sm' %>
+          </div>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+    </div>
+  </div>
+  <% else %>
+    <div class="row mt-5">
+      <div class="col-8">
+        <p>配送先が登録されていません。</p>
+      </div>
+    </div>
+  <% end %>
 </div>
-<% end %>
